@@ -4,7 +4,7 @@ const multer = require("multer");
 
 const {
   getAllEvents,
-  getEventsByCategory,
+  getEventByCategory,
   getOneEvent,
   getEventsByCreator,
   createEvent,
@@ -64,7 +64,7 @@ router.get("/", (req, res) => {
 
 router.get("/category/:category", (req, res) => {
   const category = req.params.category;
-  getEventsByCategory(category)
+  getEventByCategory(category)
     .then(events => {
       res.json(events);
     })

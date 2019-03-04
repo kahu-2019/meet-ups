@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { getEvent } from "../actions/events";
-import { getUsersByEvent } from "../actions/getUsersByEvent";
+import { getUsersByEvent } from "../actions/getAllSubscriptions";
 
 export class EventInfo extends Component {
   constructor(props) {
@@ -16,9 +16,6 @@ export class EventInfo extends Component {
   toggleTick = () => {
     this.setState({ buttonClicked: true });
   };
-  componentDidMount() {
-    this.props.getUsersByEvent(this.props.match.params.id);
-  }
 
   render() {
     const { events, auth } = this.props;
@@ -107,19 +104,11 @@ export class EventInfo extends Component {
                 <span className="panel-icon">
                   <i className="fas fa-book" aria-hidden="true" />
                 </span>
-                <ul>
-                  {this.props.selectedEventUsers &&
-                    this.props.selectedEventUsers.map(user => {
-                      return <li key={user.name}>{user.name}</li>;
-                    })}
-                </ul>
+                Tim
               </a>
             </nav>
           </div>
         </div>
-        <a className="button" href="/#">
-          Home
-        </a>
       </div>
     );
   }
@@ -128,9 +117,7 @@ export class EventInfo extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    events: state.home.events,
-    selectedEvent: state.home.selectedEvent,
-    selectedEventUsers: state.home.selectedEventUsers
+    events: state.home.events
   };
 }
 
@@ -139,7 +126,6 @@ const mapDispatchToProps = dispatch => {
     getEvent: id => {
       return dispatch(getEvent(id));
     },
-
     getUsersByEvent: id => {
       return dispatch(getUsersByEvent(id));
     }

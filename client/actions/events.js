@@ -11,8 +11,8 @@ export function getAllEvents() {
 
 export function getEvent(id) {
   return dispatch => {
-    return getOneEvent(id).then(event => {
-      dispatch(saveSelectedEvent(event));
+    return getOneEvent(id).then(events => {
+      dispatch(saveEvents(events));
     });
   };
 }
@@ -29,13 +29,6 @@ export function saveEvents(events) {
   return {
     type: "SAVE_EVENTS",
     events: events
-  };
-}
-
-export function saveSelectedEvent(event) {
-  return {
-    type: "SAVE_SELECTED_EVENT",
-    event: event
   };
 }
 

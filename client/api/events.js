@@ -12,7 +12,3 @@ export function getOneEvent(id) {
   console.log(id);
   return request.get(`/api/v1/meetups/event/${id}`).then(res => res.body);
 }
-
-export function getEventsByCategory() {
-  return request.get(`/api/v1/meetups/categories/${category}`);
-}
