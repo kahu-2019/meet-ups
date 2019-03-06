@@ -77,6 +77,7 @@ router.post("/event/photo", multer(config).single("photo"), function (
         })
           .catch(err => {
             console.log('err', err)
+            res.status(500).json({ error: "Oh no an error" });
           });
       });
     })

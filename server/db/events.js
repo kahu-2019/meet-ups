@@ -32,7 +32,7 @@ function getAllCategories(testDb) {
   // return db("events")
   return db('events').select(db.raw("MIN(category) AS category"), db.raw("MIN(image) AS image"))
     .groupBy(db.raw("LOWER(category)"))
-    .orderBy("id");
+    .orderBy(db.raw("MIN(category)"));
 }
 
 function createEvent(newEvent, testDb) {

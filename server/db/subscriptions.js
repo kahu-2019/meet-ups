@@ -26,6 +26,8 @@ function createSubscription(userId, eventId, testDb) {
   return db("subscriptions").insert({
     user_id: userId,
     event_id: eventId
+  }).catch(err => {
+    console.log('errorr!!!!', err)
   });
 }
 
