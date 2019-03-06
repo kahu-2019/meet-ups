@@ -23,15 +23,15 @@ router.use(express.json());
 
 const config = {
   storage: multer.diskStorage({
-    destination: function(req, file, next) {
+    destination: function (req, file, next) {
       next(null, "./public");
     },
-    filename: function(req, file, next) {
+    filename: function (req, file, next) {
       const ext = file.mimetype.split("/")[1];
       next(null, file.fieldname + "-" + Date.now() + "." + ext);
     }
   }),
-  fileFilter: function(req, file, next) {
+  fileFilter: function (req, file, next) {
     if (!file) {
       next();
     }
@@ -44,7 +44,7 @@ const config = {
   }
 };
 //EventForm CreateEvent api route
-router.post("/event/photo", multer(config).single("photo"), function(
+router.post("/event/photo", multer(config).single("photo"), function (
   req,
   res,
   next
@@ -74,11 +74,15 @@ router.post("/event/photo", multer(config).single("photo"), function(
           getEventsByCreator(actualUserId).then(response => {
             res.json(response);
           });
-        });
+        })
+          .catch(err => {
+            console.log('err', err)
+          });
       });
     })
 
     .catch(err => {
+      console.log('err', err)
       res.status(500).json({ error: "Oh no an error" });
     });
 });
@@ -87,7 +91,7 @@ router.post("/event/photo", multer(config).single("photo"), function(
 router.post(
   "/event/photo/edit/:eventId",
   multer(config).single("photo"),
-  function(req, res, next) {
+  function (req, res, next) {
     console.log(req.params.eventId);
     console.log(req.body);
     console.log(req.file);

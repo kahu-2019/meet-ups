@@ -21,6 +21,8 @@ function getSubscriptionsByUsername(username, testDb) {
 
 function createSubscription(userId, eventId, testDb) {
   const db = testDb || connection;
+  console.log('userId', userId, typeof userId)
+  console.log('eventId', eventId, typeof eventId)
   return db("subscriptions").insert({
     user_id: userId,
     event_id: eventId
